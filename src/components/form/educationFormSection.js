@@ -1,5 +1,5 @@
 import React from 'react';
-import FormSectionMixin from './formSectionMixin';
+import FormSection from './formSection';
 import EducationForm from './educationForm';
 
 class EducationCard extends React.Component {
@@ -28,7 +28,7 @@ class EducationCard extends React.Component {
   }
 }
 
-class EducationFormSection extends FormSectionMixin {
+class EducationFormSection extends FormSection {
   render() {
     let schools = this.props.schools;
     return (

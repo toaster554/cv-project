@@ -1,5 +1,5 @@
 import React from 'react';
-import FormSectionMixin from './formSectionMixin';
+import FormSection from './formSection';
 import SkillsForm from './skillsForm';
 
 class SkillCard extends React.Component {
@@ -19,7 +19,7 @@ class SkillCard extends React.Component {
   }
 }
 
-class SkillsFormSection extends FormSectionMixin {
+class SkillsFormSection extends FormSection {
   render() {
     let skills = this.props.skills;
     return (

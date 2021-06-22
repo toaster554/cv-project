@@ -1,5 +1,5 @@
 import React from 'react';
-import FormSectionMixin from './formSectionMixin';
+import FormSection from './formSection';
 import ExperienceForm from './experienceForm';
 
 class ExperienceCard extends React.Component {
@@ -32,7 +32,7 @@ class ExperienceCard extends React.Component {
   }
 }
 
-class ExperienceFormSection extends FormSectionMixin {
+class ExperienceFormSection extends FormSection {
   render() {
     let experience = this.props.experience;
     return (

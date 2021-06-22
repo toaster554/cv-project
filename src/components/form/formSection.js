@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FormSectionMixin extends React.Component {
+class FormSection extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,4 +18,4 @@ class FormSectionMixin extends React.Component {
   }
 }
 
-export default FormSectionMixin;
+export default FormSection;
