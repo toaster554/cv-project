@@ -1,4 +1,5 @@
 import React from 'react';
+import FormSectionMixin from './formSectionMixin';
 import EducationForm from './educationForm';
 
 class EducationCard extends React.Component {
@@ -27,23 +28,7 @@ class EducationCard extends React.Component {
   }
 }
 
-class EducationFormSection extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { formPresent: false };
-    this.showForm = this.showForm.bind(this);
-    this.hideForm = this.hideForm.bind(this);
-  }
-
-  showForm() {
-    this.setState({ formPresent: true });
-  }
-
-  hideForm() {
-    this.setState({ formPresent: false });
-  }
-
+class EducationFormSection extends FormSectionMixin {
   render() {
     let schools = this.props.schools;
     return (

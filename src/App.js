@@ -1,85 +1,33 @@
 import React from 'react';
-import uniqid from 'uniqid';
 import './styles/App.css';
 import Preview from './components/preview/preview';
 import PreviewToggle from './components/previewToggle';
 import Form from './components/form/form';
+import sampleInput from './components/sampleInput';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: 'John Smith',
-      address: '123 Street Ave SE, Houston, TX',
-      email: 'jsmith233@gmail.com',
-      phoneNumber: '616-631-3965',
-      website: 'jsmith233.github.io',
-      objective:
-        "I'm a fresh graduate looking for a job to pay for my gacha addiction.",
-      schools: [
-        {
-          schoolName: 'University of College',
-          from: '2010',
-          to: '2014',
-          degree: 'B.S.',
-          fieldOfStudy: 'Computer Science',
-          id: uniqid(),
-        },
-        {
-          schoolName: 'College of University',
-          from: '2015',
-          to: '2017',
-          degree: 'M.S.',
-          fieldOfStudy: 'Data Science',
-          id: uniqid(),
-        },
-      ],
-      skills: [
-        {
-          skillName: 'SQL',
-          skillDescription: 'PostgresSQL, MySQL, SQLite',
-          id: uniqid(),
-        },
-        {
-          skillName: 'NoSQL',
-          skillDescription: 'MongoDB, Cassandra, Redis',
-          id: uniqid(),
-        },
-        {
-          skillName: 'Programming',
-          skillDescription: 'Python 3, Javascript, C#',
-          id: uniqid(),
-        },
-      ],
-      experience: [
-        {
-          companyName: 'ProQuest',
-          role: 'Student Software Developer',
-          location: 'Ann Arbor, MI',
-          from: 'Jan 2020',
-          to: 'Dec 2020',
-          experienceDescription:
-            'Improved patent search using Machine Learning',
-          id: uniqid(),
-        },
-        {
-          companyName: 'IBM',
-          role: 'Intern Software Developer',
-          location: 'Chicago, IL',
-          from: 'Jan 2021',
-          to: 'Dec 2021',
-          experienceDescription: 'Did stuff',
-          id: uniqid(),
-        },
-      ],
-      inPreviewMode: true,
+      name: '',
+      address: '',
+      email: '',
+      phoneNumber: '',
+      website: '',
+      objective: '',
+      schools: [],
+      skills: [],
+      experience: [],
+      inPreviewMode: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.togglePreviewState = this.togglePreviewState.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.loadSampleInput = this.loadSampleInput.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
 
   handleChange(targetField, event) {
@@ -87,7 +35,6 @@ class App extends React.Component {
   }
 
   togglePreviewState() {
-    console.log('changed state');
     this.setState((prevState) => ({
       inPreviewMode: !prevState.inPreviewMode,
     }));
@@ -105,10 +52,36 @@ class App extends React.Component {
     }));
   }
 
+  loadSampleInput() {
+    this.setState({ ...sampleInput });
+  }
+
+  clearState() {
+    this.setState({
+      name: '',
+      address: '',
+      email: '',
+      phoneNumber: '',
+      website: '',
+      objective: '',
+      schools: [],
+      skills: [],
+      experience: [],
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <h1 className="website-title">Resumer Builder Application</h1>
+        <div className="load-clear-container">
+          <button onClick={this.loadSampleInput}>
+            <h3>Load Sample Input</h3>
+          </button>
+          <button onClick={this.clearState}>
+            <h3>Clear Form</h3>
+          </button>
+        </div>
         <PreviewToggle togglePreviewState={this.togglePreviewState} />
         {this.state.inPreviewMode ? (
           <Preview {...this.state} />

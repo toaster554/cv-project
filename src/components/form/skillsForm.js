@@ -1,5 +1,6 @@
 import React from 'react';
 import uniqid from 'uniqid';
+import WarningMessage from './warningMessage';
 
 class SkillsForm extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class SkillsForm extends React.Component {
     this.state = {
       skillName: '',
       skillDescription: '',
+      displayWarningMessage: false,
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -16,13 +18,16 @@ class SkillsForm extends React.Component {
 
   handleAdd(event) {
     event.preventDefault();
-    // TODO: display warning
-    if (!this.state.skillName) return;
+    if (!this.state.skillName) {
+      this.setState({ displayWarningMessage: true });
+      return;
+    }
     let item = { ...this.state, id: uniqid() };
     this.props.addItem('skills', item);
     this.setState({
       skillName: '',
       skillDescription: '',
+      displayWarningMessage: false,
     });
   }
 
@@ -33,11 +38,12 @@ class SkillsForm extends React.Component {
   render() {
     return (
       <div className="formWrapper">
+        {this.state.displayWarningMessage && <WarningMessage />}
         <form class="skillForm">
           <input
             type="text"
             name="skillName"
-            placeholder="Skill Name"
+            placeholder="Skill Name (Required)"
             value={this.state.skillName}
             onChange={(event) => this.handleChange('skillName', event)}
             required

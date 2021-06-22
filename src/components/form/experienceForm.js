@@ -1,5 +1,6 @@
 import React from 'react';
 import uniqid from 'uniqid';
+import WarningMessage from './warningMessage';
 
 class ExperienceForm extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ExperienceForm extends React.Component {
       from: '',
       to: '',
       experienceDescription: '',
+      displayWarningMessage: false,
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -20,15 +22,17 @@ class ExperienceForm extends React.Component {
 
   handleAdd(event) {
     event.preventDefault();
-    // TODO: display warning
     if (
       !this.state.companyName ||
       !this.state.role ||
       !this.state.location ||
       !this.state.from ||
       !this.state.to
-    )
+    ) {
+      this.setState({ displayWarningMessage: true });
       return;
+    }
+
     let item = { ...this.state, id: uniqid() };
     this.props.addItem('experience', item);
     this.setState({
@@ -38,6 +42,7 @@ class ExperienceForm extends React.Component {
       from: '',
       to: '',
       experienceDescription: '',
+      displayWarningMessage: false,
     });
   }
 
@@ -48,11 +53,12 @@ class ExperienceForm extends React.Component {
   render() {
     return (
       <div className="formWrapper">
+        {this.state.displayWarningMessage && <WarningMessage />}
         <form className="experienceForm">
           <input
             type="text"
             name="companyName"
-            placeholder="Company Name"
+            placeholder="Company Name (Required)"
             value={this.state.companyName}
             onChange={(event) => this.handleChange('companyName', event)}
             required
@@ -60,7 +66,7 @@ class ExperienceForm extends React.Component {
           <input
             type="text"
             name="role"
-            placeholder="Role"
+            placeholder="Role (Required)"
             value={this.state.role}
             onChange={(event) => this.handleChange('role', event)}
             required
@@ -68,7 +74,7 @@ class ExperienceForm extends React.Component {
           <input
             type="text"
             name="location"
-            placeholder="Location"
+            placeholder="Location (Required)"
             value={this.state.location}
             onChange={(event) => this.handleChange('location', event)}
             required
@@ -76,7 +82,7 @@ class ExperienceForm extends React.Component {
           <input
             type="text"
             name="from"
-            placeholder="From (MM/YYYY)"
+            placeholder="From (MM/YYYY) (Required)"
             value={this.state.from}
             onChange={(event) => this.handleChange('from', event)}
             required
@@ -84,7 +90,7 @@ class ExperienceForm extends React.Component {
           <input
             type="text"
             name="to"
-            placeholder="To (MM/YYYY)"
+            placeholder="To (MM/YYYY) (Required)"
             value={this.state.to}
             onChange={(event) => this.handleChange('to', event)}
             required

@@ -1,4 +1,5 @@
 import React from 'react';
+import FormSectionMixin from './formSectionMixin';
 import ExperienceForm from './experienceForm';
 
 class ExperienceCard extends React.Component {
@@ -31,23 +32,7 @@ class ExperienceCard extends React.Component {
   }
 }
 
-class ExperienceFormSection extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { formPresent: false };
-    this.showForm = this.showForm.bind(this);
-    this.hideForm = this.hideForm.bind(this);
-  }
-
-  showForm() {
-    this.setState({ formPresent: true });
-  }
-
-  hideForm() {
-    this.setState({ formPresent: false });
-  }
-
+class ExperienceFormSection extends FormSectionMixin {
   render() {
     let experience = this.props.experience;
     return (
